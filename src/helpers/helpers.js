@@ -1,4 +1,34 @@
-class Server {
+const slug = require("slug");
+const cloudinary = require("cloudinary").v2;
+require("dotenv").config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.SECRET_API_KEY,
+  // secure:true,
+});
+
+class Helpers {
+  upload(file, folder) {
+    console.log(process.env.API_KEY);
+    return new Promise((resolve, reject) => {
+      cloudinary.uploader
+        .upload(file, {
+          folder: `/hackaton-sevima/${folder}`,
+          use_filename: true,
+        })
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((er) => {
+          reject(er);
+        });
+    });
+  }
+  convertToSlug(text) {
+    return slug(text);
+  }
   response(res, code, message, data = null) {
     if (code === 200) message = "success";
     if (code === 500 && !message) message = "failed";
@@ -26,4 +56,4 @@ class Server {
   }
 }
 
-module.exports = Server;
+module.exports = Helpers;
