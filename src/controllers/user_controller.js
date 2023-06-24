@@ -14,11 +14,11 @@ class User extends Helpers {
         return super.responseWithToken(res, 500, "email has been used");
       body.password = bcrypt.hashSync(body.password, 10);
       body.slug = super.convertToSlug(body.name);
+      const data = await usermodel.create(body);
       const token = jwt.sign(
-        { id: body.id, name: body.name, slug: body.slug },
+        { id: data.id, name: body.name, slug: body.slug },
         process.env.JWT_SIGN
       );
-      await usermodel.create(body);
       return super.responseWithToken(res, 200, null, token);
     } catch (er) {
       console.log(er);
@@ -35,7 +35,7 @@ class User extends Helpers {
         id_user: data.id,
         token: code,
       });
-      return super.response(res,200,null)
+      return super.response(res, 200, null);
     } catch (er) {
       console.log(er);
       return super.response(res, 500);

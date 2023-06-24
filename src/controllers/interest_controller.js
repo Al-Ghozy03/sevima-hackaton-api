@@ -9,6 +9,7 @@ class Interest extends Helpers {
     try {
       const id_user = req.headers.authorization.split(" ")[1];
       const { data } = req.body;
+      console.log(req.body);
       for (let i = 0; i < data.length; i++) {
         const check = await categorymodel.findByPk(data[i].id_category);
         if (!check)
