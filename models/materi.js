@@ -10,12 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      materi.belongsTo(models.course,{as:"materi",foreignKey:"id_course"})
     }
   }
   materi.init({
     title: DataTypes.STRING,
     slug: DataTypes.STRING,
+    content: DataTypes.TEXT,
     id_course: DataTypes.INTEGER
   }, {
     sequelize,
