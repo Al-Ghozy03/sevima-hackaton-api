@@ -16,7 +16,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       id_course: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+        references: {
+          model: "courses",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,

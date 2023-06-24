@@ -16,7 +16,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       id_materi: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+        references: {
+          model: "materis",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,

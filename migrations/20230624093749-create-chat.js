@@ -10,10 +10,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       from: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+        references: {
+          model: "users",
+          key: "id",
+        },
       },
       to: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+        references: {
+          model: "users",
+          key: "id",
+        },
       },
       room_code: {
         type: Sequelize.STRING
